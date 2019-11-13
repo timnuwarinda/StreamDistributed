@@ -7,6 +7,15 @@ spec:
   selector:
     app: server
   ports:
-    - protocol: TCP
+    - name: server_port
+      protocol: TCP
       port: 80
-      targetPort: 8080
+      targetPort: 3333
+    - name: rtmp_port
+      protocol: TCP
+      port: 80
+      targetPort: 1935
+    - name: stream_port 
+      protocol: TCP
+      port: 80
+      targetPort: 8888
