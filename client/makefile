@@ -1,6 +1,6 @@
 
 
-containerID := $(shell docker ps -a -q --filter ancestor=timnuwa/clientservice:latest)
+containerID := $(shell docker ps -a -q --filter ancestor=timnuwa/clientstreamservice:latest)
 
 #===================  Angular  ===========================
 
@@ -9,21 +9,21 @@ run-local:
 
 #===================  docker  ===========================
 docker-build:
-	docker build -t timnuwa/clientservice:latest .
+	docker build -t timnuwa/clientstreamservice:latest .
 
 
 docker-run: docker-build
-	docker run -p 8080:8080 timnuwa/clientservice:latest
+	docker run -p 8080:8080 timnuwa/clientstreamservice:latest
 
 
 docker-login:
 	docker login
 
 docker-push: docker-login docker-build
-	docker push timnuwa/clientservice:latest
+	docker push timnuwa/clientstreamservice:latest
 
 docker-bash:
-	docker exec -ti timnuwa/clientservice:latest /bin/sh
+	docker exec -ti timnuwa/clientstreamservice:latest /bin/sh
 
 docker-containerID:
 	@echo running: $(containerID)
@@ -84,7 +84,7 @@ k8s-persistence-create:
 	kubectl apply -f k8s-persistence-volumn.yaml
 	kubectl apply -f k8s-persistence-database.yaml
 	echo "create initial db, run this when DB service"gcloud container clusters get-credentials standard-cluster-1 --zone us-central1-a --project ecommerce-258417
-	echo "kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h clientservice-db -ppassword -e 'create database db_example;'"
+	echo "kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h clientstreamservice-db -ppassword -e 'create database db_example;'"
 
 k8s-persistence-delete:
 	kubectl delete -f k8s-persistence-database.yaml

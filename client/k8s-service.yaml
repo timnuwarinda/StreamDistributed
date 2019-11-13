@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: clientservice
+  name: clientstreamservice
   labels:
-    run: clientservice
+    run: clientstreamservice
 spec:
   type: NodePort
   ports:
@@ -15,5 +15,5 @@ spec:
     protocol: TCP
     name: https
   selector:
-    run: clientservice
+    run: clientstreamservice
 ---

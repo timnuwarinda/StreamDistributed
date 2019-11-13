@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: clientservice-deployment
+  name: clientstreamservice-deployment
   labels:
-    app: clientservice
+    app: clientstreamservice
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: clientservice
+      app: clientstreamservice
   template:
     metadata:
       labels:
-        app: clientservice
+        app: clientstreamservice
 
     spec:
       containers:
-        - name: clientservice
-          image: timnuwa/clientservice:latest
+        - name: clientstreamservice
+          image: timnuwa/clientstreamservice:latest
           ports:
             - containerPort: 80
             - containerPort: 443
@@ -25,40 +25,40 @@ spec:
             - name: KEY1
               valueFrom:
                 configMapKeyRef:
-                  name: clientservice-config
+                  name: clientstreamservice-config
                   key: someKey1
             - name: PRODUCTS_SERVICE
               valueFrom:
                 configMapKeyRef:
-                  name: clientservice-config
+                  name: clientstreamservice-config
                   key: productservice
             - name: AUTH_URL
               valueFrom:
                 configMapKeyRef:
-                  name: clientservice-config
+                  name: clientstreamservice-config
                   key: authURL
             - name: CART_SERVICE
               valueFrom:
                 configMapKeyRef:
-                  name: clientservice-config
+                  name: clientstreamservice-config
                   key: cartservice
             - name: PAYMENT_SERVICE
               valueFrom:
                 configMapKeyRef:
-                  name: clientservice-config
+                  name: clientstreamservice-config
                   key: paymentservice
             - name: ORDER_SERVICE
               valueFrom:
                 configMapKeyRef:
-                  name: clientservice-config
+                  name: clientstreamservice-config
                   key: orderService
             - name: USER_SERVICE
               valueFrom:
                 configMapKeyRef:
-                  name: clientservice-config
+                  name: clientstreamservice-config
                   key: userService
             - name: SERVICE_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: clientservice-secrets
+                  name: clientstreamservice-secrets
                   key: service-api-key
