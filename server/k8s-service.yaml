@@ -9,13 +9,13 @@ spec:
   ports:
     - name: serverport
       protocol: TCP
-      port: 80
+      port: 3333
       targetPort: 3333
     - name: rtmpport
       protocol: TCP
-      port: 80
+      port: 1935
       targetPort: 1935
     - name: streamport 
       protocol: TCP
-      port: 80
+      port: 8888
       targetPort: 8888
