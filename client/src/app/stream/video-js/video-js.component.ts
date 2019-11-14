@@ -41,7 +41,7 @@ export class VideoJsComponent implements OnDestroy, OnInit {
       stream: false,
       videoJsOptions: null
     }
-    axios.get('http://35.224.91.202:3333/user', {
+    axios.get('http://34.67.57.77:3333/user', {
 
     // axios.get('/user', {
       params: {
@@ -56,7 +56,7 @@ export class VideoJsComponent implements OnDestroy, OnInit {
               autoplay: false,
               controls: true,
               sources: [{
-                  src: 'http://35.224.91.202:' + config.rtmp_server.http.port + '/live/' + res.data.stream_key + '/index.m3u8',
+                  src: 'http://34.67.57.77:' + config.rtmp_server.http.port + '/live/' + res.data.stream_key + '/index.m3u8',
                   type: 'application/x-mpegURL'
               }],
               fluid: true,
