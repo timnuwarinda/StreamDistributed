@@ -1,4 +1,5 @@
-FROM node:carbon
+FROM node:alpine
+RUN apk add  --no-cache ffmpeg
  
 # Create app directory
 WORKDIR /usr/src/app
@@ -12,6 +13,5 @@ COPY . .
  
 EXPOSE 3333
 
-FROM ffmpeg/coverity
 
 CMD [ "node", "app.js" ]
