@@ -35,7 +35,7 @@ export class LivestreamsComponent implements OnInit , OnChanges, AfterContentChe
   
   }
   getLiveStreams() {
-    axios.get('http://server.default.svc.cluster.local:' + config.rtmp_server.http.port + '/api/streams')
+    axios.get('http://35.222.37.202:' + config.rtmp_server.http.port + '/api/streams')
         .then(res => {
             let streams = res.data;
             // console.log(`res data:`, streams['live']);
@@ -45,8 +45,8 @@ export class LivestreamsComponent implements OnInit , OnChanges, AfterContentChe
         });
   }
   getStreamsInfo(live_streams) {
-    axios.get('http://server.default.svc.cluster.local:3333/streams/info', {
-      // axios.get('http://server.default.svc.cluster.local:' + config.rtmp_server.http.port  + '/streams', {
+    axios.get('http://35.222.37.202:3333/streams/info', {
+      // axios.get('http://35.222.37.202:' + config.rtmp_server.http.port  + '/streams', {
 
         params: {
             streams: live_streams

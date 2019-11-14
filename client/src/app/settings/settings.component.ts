@@ -29,7 +29,7 @@ export class SettingsComponent implements OnInit {
   }
 
   generateStreamKey(e){
-    axios.post('http://server.default.svc.cluster.local:3333/settings/stream_key',{
+    axios.post('http://35.222.37.202:3333/settings/stream_key',{
         user: this.email
     })
         .then(res => {
@@ -40,7 +40,7 @@ export class SettingsComponent implements OnInit {
   }
 
   getStreamKey(){
-    axios.get('http://server.default.svc.cluster.local:3333/settings/stream_key',{
+    axios.get('http://35.222.37.202:3333/settings/stream_key',{
       params: {
         user: this.email
       }
