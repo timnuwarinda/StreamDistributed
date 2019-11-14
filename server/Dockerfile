@@ -11,5 +11,7 @@ RUN npm install
 COPY . .
  
 EXPOSE 3333
- 
+
+FROM ffmpeg:latest
+
 CMD [ "node", "app.js" ]
