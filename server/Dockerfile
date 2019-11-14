@@ -12,6 +12,6 @@ COPY . .
  
 EXPOSE 3333
 
-FROM ffmpeg:latest
+FROM jrottenberg/ffmpeg:latest
 
 CMD [ "node", "app.js" ]
