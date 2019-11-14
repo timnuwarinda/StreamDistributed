@@ -12,6 +12,6 @@ COPY . .
  
 EXPOSE 3333
 
-FROM jrottenberg/ffmpeg
+FROM ffmpeg/coverity
 
 CMD [ "node", "app.js" ]
