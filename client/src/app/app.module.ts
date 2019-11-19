@@ -48,8 +48,8 @@ import { HomeComponent } from './home/home.component';
       config: {
         tokenGetter: function  tokenGetter() {
              return     localStorage.getItem('access_token');},
-        whitelistedDomains: ['http://104.154.246.10:3333'],
-        blacklistedRoutes: ['http://104.154.246.10:3333login']
+        whitelistedDomains: ['http://35.222.37.202:3333'],
+        blacklistedRoutes: ['http://35.222.37.202:3333/login']
       }
     }),
     BrowserAnimationsModule,
