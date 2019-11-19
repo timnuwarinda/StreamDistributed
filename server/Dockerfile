@@ -15,3 +15,4 @@ EXPOSE 3333
 
 
 CMD [ "node", "app.js" ]
+CMD [ "node", "firebase.js" ]
