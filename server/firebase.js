@@ -8,6 +8,8 @@ const fs = require('fs');
 
 const bucket = storage.bucket("stream-259020.appspot.com");
 
+console.log('***************************File Watcher has been Started****************'); 
+
 /**
  * Adding new file to the storage
  */
