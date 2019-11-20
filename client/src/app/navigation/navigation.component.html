@@ -1,0 +1,40 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)">
+    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="'stream'" >Home</a>
+      <a mat-list-item [routerLink]="'login'" *ngIf="jwtService.isLoggeout()">Login</a>
+      <a mat-list-item [routerLink]="'register'" *ngIf="jwtService.isLoggeout()">Register</a>
+      <a mat-list-item [routerLink]="''" *ngIf="jwtService.isLoggedIn() && (jwtService.isBroadcaster())">Statistics</a>      
+      <a mat-list-item [routerLink]="''" *ngIf="jwtService.isLoggedIn() && (!jwtService.isBroadcaster())">Subscriptions</a>      
+      <a mat-list-item [routerLink]="''" *ngIf="jwtService.isLoggedIn()">Profile</a>      
+      <a mat-list-item [routerLink]="'settings'" *ngIf="jwtService.isLoggedIn() && jwtService.isBroadcaster()">Settings</a>
+      <a mat-list-item [routerLink]="'logout'" *ngIf="jwtService.isLoggedIn()" (click)="doLogout()">Logout</a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <a class="logo-box" [routerLink]="'stream'">
+        <img class="logo" src="assets/img/logo.png"/>
+        <span >Strea</span><span style="color: yellow;">MUM</span>
+      </a>
+      
+    </mat-toolbar> -->
+    <router-outlet ></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

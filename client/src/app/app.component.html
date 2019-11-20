@@ -1,0 +1,66 @@
+<!-- <mat-toolbar color="primary">
+  <span>STREAMING APP</span>
+</mat-toolbar>
+<div fxLayout="row" fxLayoutAlign="center center">
+
+  <router-outlet></router-outlet>
+</div> -->
+
+
+<!-- <div>
+  <button (click)="doLogin()" *ngIf="!token" type="button" class="btn btn-primary btn-sm" >Login</button>
+  <button (click)="doLogout()" *ngIf="token" >Logout</button>
+</div>
+<app-login></app-login>
+<hr />
+<app-register></app-register>
+
+<router-outlet ></router-outlet> -->
+<!-- <pdf-viewer [src]="pdfSrc" 
+              [render-text]="true"
+              style="display: block;"
+  ></pdf-viewer> -->
+
+  <mat-toolbar color="primary" class="app-header">
+      
+
+    <div><a class="positronx logo-box"><img class="logo" src="assets/img/logo.png"/><span >Strea</span><span style="color: yellow;">MUM</span></a></div>
+    <span class="nav-tool-items">
+      <a mat-button routerLink="login" routerLinkActive="active" *ngIf="!jwtService.isLoggedIn()">Log in</a>
+      <a mat-button mat-raised-button routerLink="register" routerLinkActive="active" *ngIf="jwtService.isLoggeout()">Register</a>
+      <a mat-button routerLink="about" routerLinkActive="active" *ngIf="jwtService.isLoggedIn()">About</a>
+      <a mat-button mat-raised-button routerLink="logout" routerLinkActive="active" *ngIf="jwtService.isLoggedIn()" (click)="doLogout()">Logout</a>
+
+    </span>
+  </mat-toolbar>
+  <mat-sidenav-container class="sidenav-container" *ngIf="jwtService.isLoggedIn()">
+    <mat-sidenav
+      #drawer
+      class="sidenav"
+      fixedInViewport="true"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="!(isHandset$ | async)">
+      <mat-toolbar color="primary">Menu</mat-toolbar>
+      <mat-nav-list>
+        <a mat-list-item [routerLink]="'stream'" >Home</a>
+        <a mat-list-item [routerLink]="'login'" *ngIf="jwtService.isLoggeout()">Login</a>
+        <!-- <a mat-list-item [routerLink]="'register'" *ngIf="jwtService.isLoggeout()">Register</a>
+        <a mat-list-item [routerLink]="'settings'" *ngIf="jwtService.isLoggedIn() && jwtService.isBroadcaster()" >Settings</a> -->
+        <!-- <a mat-list-item [routerLink]="'logout'" *ngIf="jwtService.isLoggedIn()" (click)="doLogout()">Logout</a> -->
+        <a mat-list-item [routerLink]="'register'" *ngIf="jwtService.isLoggeout()">Register</a>
+        <a mat-list-item  *ngIf="jwtService.isLoggedIn() && (jwtService.isBroadcaster())">Statistics</a>      
+        <a mat-list-item  *ngIf="jwtService.isLoggedIn() && (!jwtService.isBroadcaster())">Subscriptions</a>      
+        <a mat-list-item *ngIf="jwtService.isLoggedIn()">Profile</a>      
+        <a mat-list-item [routerLink]="'settings'" *ngIf="jwtService.isLoggedIn() && jwtService.isBroadcaster()">Settings</a>
+        
+      </mat-nav-list>
+    </mat-sidenav>
+    
+  </mat-sidenav-container>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
+
+<!-- <router-outlet *ngIf="token"></router-outlet> -->
+

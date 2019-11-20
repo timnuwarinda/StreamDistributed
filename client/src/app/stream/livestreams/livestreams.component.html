@@ -1,0 +1,22 @@
+<div class="streams row">
+     
+    <div *ngFor="let stream of stream$ | async" class="stream col-xs-12 col-sm-12 col-md-3 col-lg-4">
+        <span class="live-label">LIVE</span>
+        <a [routerLink]="['/stream', stream.username]">
+            <div class="stream-thumbnail">
+                <!-- <img src='http://127.0.0.1:3333/thumbnails/'+ {{stream.stream_key}} + '.png'/> -->
+                <!-- <ngx-avatar name={{stream.name}} borderCorner="20" borderColor="#013ADF" bgColor="#000000" fgColor="#ffffff" size="150" textSizeRatio="2.2" [round]="false"> -->
+                <!-- </ngx-avatar> -->
+                <img width="200px" src='assets/img/video-icon.jpg'/>
+            </div>
+        </a>
+    
+        <span class="username">
+            <a [routerLink]="['/stream', stream.username]">
+                {{stream.username}}
+            </a>
+        </span>
+        :{{stream.name}}
+    </div>
+</div>
+
