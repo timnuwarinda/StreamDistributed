@@ -11,7 +11,6 @@ let checkToken = function(request, response, next){
             response.status(400).json({ status: 400, message: 'Error, Invalid Token' });
         } else {
             let decodedToken = decode(token);
-           
             request.username = decodedToken.username;
             next();
         }

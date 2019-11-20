@@ -52,7 +52,8 @@ let login = function(request, response, next) {
               username: data.username,
               name: data.firstName + " " + data.lastName,
               email: data.email,
-              userType: data.userType
+              userType: data.userType,
+              id : data._id
             });
           } else {
             response
@@ -74,21 +75,31 @@ let login = function(request, response, next) {
 };
 
 let subscribe = function(request, response, next) {
+
+  console.log("subscribtion :: "+ request.body.broadcasterId);
   const broadcasterId = request.body.broadcasterId;
-  delete request.body.broadcaster;
+  delete request.body.broadcasterId;
   // const userId = request.body.userId;
   // const userEmail = request.body.userEmail;
   // const info = { userId: userId, email: userEmail }
-
   try {
-    Account.findOneAndUpdate(
-      { _id: broadcasterId },
-      { $push: { subscribers: request.body } },
-      function(err, update) {
-        if (err) next(err);
-        else response.json({ data: "subscribed sucessfully" });
-      }
-    );
+let exist = checkSubscribeExist(broadcasterId,request.body.userId);
+if(!exist){
+  Account.findOneAndUpdate(
+    { _id: broadcasterId },
+    { $push: { subscribers: request.body } },
+    function(err, update) {
+      if (err) next(err);
+      else response.json({ "data": "subscribed sucessfully" });
+    }
+  );
+}else{
+  response.json({ "data": "you are already a subscriber" });
+}
+ 
+   
+
+   
   } catch (err) {
     console.log("Error happened :: " + error);
     next(error);
