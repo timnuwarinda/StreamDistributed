@@ -9,3 +9,6 @@ data:
   nextService: server.default.svc.cluster.local
   userService: userservice
   userServicePort: "8080"
+
+  # redisService: falling-kitten-redis-master.default.svc.cluster.local
+  # redisServicePort: "6379"
