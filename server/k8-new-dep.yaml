@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gcsfuse-test
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gcsfuse-test
+    spec:
+      containers:
+        - name: gcsfuse-test
+          image: timnuwa/gsustream:latest
+          ports: 
+          - containerPort: 8080
+          securityContext:
+            privileged: true
+            capabilities:
+              add:
+                - SYS_ADMIN
+          # lifecycle:
+          #   postStart:
+          #     exec:
+          #       command: ["gcsfuse", "-o", "nonempty", "gs://stream-259020.appspot.com", "/mnt/some-bucket"]
+          #   preStop:
+          #     exec:
+          #       command: ["fusermount", "-u", "/mnt/some-bucket"]
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+spec:
+  type: LoadBalancer
+  selector:
+    app: server
+  ports:
+    - name: hlsport
+      protocol: TCP
+      port: 8080
+      targetPort: 8080

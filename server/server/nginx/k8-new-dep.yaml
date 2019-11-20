@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gcsnginx
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gcsnginx
+    spec:
+      containers:
+        - name: gcsnginx
+          image: timnuwa/nginxstream:latest
+          ports: 
+          - containerPort: 8080
+          securityContext:
+            privileged: true
+            capabilities:
+              add:
+                - SYS_ADMIN
+          lifecycle:
+            postStart:
+              exec:
+                command: ["gcsfuse", "-o", "allow_other","--implicit-dirs", "stream-259020.appspot.com", "/mnt/data"]
+            preStop:
+              exec:
+                command: ["fusermount", "-u", "/mnt/data"]
+---
+        
+apiVersion: v1
+kind: Service
+metadata:
+  name: gcsnginx-servie
+spec:
+  type: LoadBalancer
+  selector:
+    app: gcsnginx
+  ports:
+    - name: hlsport
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
