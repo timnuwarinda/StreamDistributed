@@ -1,12 +1,7 @@
 var express = require('express');
 var socket = require('socket.io');
 
-//Redis setup
-var redis = require('socket.io-redis');
-io.adapter(redis({ host: '10.0.14.252', port: 6379 }));
-// // var redis_option={ host: 'torpid-possum-redis-master', port: 6379 };
-// var redis_option={ host: 'localhost', port: 6379 };
-// var redis = require("redis");
+
 
 //App setup
 var app = express();
@@ -20,6 +15,14 @@ app.use(express.static('public'));
 
 //socket setup
 var io = socket(server);
+
+
+//Redis setup
+var redis = require('socket.io-redis');
+io.adapter(redis({ host: '10.0.14.252', port: 6379 }));
+// // var redis_option={ host: 'torpid-possum-redis-master', port: 6379 };
+// var redis_option={ host: 'localhost', port: 6379 };
+// var redis = require("redis");
 
 const chatRooms = ['nba','basketball','bedminton'];
 
