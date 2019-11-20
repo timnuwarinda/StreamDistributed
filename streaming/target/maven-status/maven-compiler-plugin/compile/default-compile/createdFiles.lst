@@ -1,0 +1,8 @@
+com/stream/streaming/Repository/StreamRepository.class
+com/stream/streaming/service/StreamingService.class
+com/stream/streaming/model/Streaming.class
+com/stream/streaming/config/JwtConfigurationUtility.class
+com/stream/streaming/StreamingApplication.class
+com/stream/streaming/service/impl/StreamingServiceImpl.class
+com/stream/streaming/controller/StreamingController.class
+com/stream/streaming/service/MongoService.class
