@@ -19,7 +19,19 @@ spec:
         - name: server
           image: timnuwa/server:latest
           ports:
-            - containerPort: 8888
+            - containerPort: 1935
+          securityContext:
+            privileged: true
+            capabilities:
+              add:
+                - SYS_ADMIN
+          # lifecycle:
+          #   postStart:
+          #     exec:
+          #       command: ["gcsfuse","-o", "allow_other", "--key-file", "/usr/src/app/stream-259020-firebase-adminsdk-z0kuq-cc9d2f5021.json","--implicit-dirs", "stream-259020.appspot.com", "/mnt/data"]
+          #   preStop:
+          #     exec:
+          #       command: ["fusermount", "-u", "/mnt/data"]
           env:
             - name: KEY1
               valueFrom:
