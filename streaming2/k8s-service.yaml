@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: streamingservice
+spec:
+  type: LoadBalancer
+  selector:
+    app: streamingservice
+  ports:
+    - port: 8085
+      targetPort: 8085
+  

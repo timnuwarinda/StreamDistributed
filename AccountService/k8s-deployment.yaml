@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: accountservice-deployment
+  labels:
+    app: accountservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: accountservice
+  template:
+    metadata:
+      labels:
+        app: accountservice
+
+    spec:
+      containers:
+        - name: accountservice
+          image: yvanremy/accountservice:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: KEY1
+              valueFrom:
+                configMapKeyRef:
+                  name: accountservice-config
+                  key: someKey1
+            

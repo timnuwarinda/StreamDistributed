@@ -1,0 +1,11 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: streamingservice-config
+data:
+  someKey1: value1
+  #reference: https://cloud.spring.io/spring-cloud-static/spring-cloud-kubernetes/1.1.0.RC1/reference/html/#kubernetes-native-service-discovery
+
+  nextService: streamingservice.default.svc.cluster.local
+  userService: userservice
+  userServicePort: "8085"

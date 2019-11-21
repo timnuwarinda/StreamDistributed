@@ -3,7 +3,7 @@ const {notifySubscriber} = require("./AccountService")
  
 const kafka = new Kafka({
   clientId: 'my-app',
-  brokers: ['127.0.0.1:9092']
+  brokers: ['stream-kafka:9092']
 })
 
 const consumer = kafka.consumer({ groupId: 'email-group' });
