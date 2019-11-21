@@ -36,7 +36,7 @@ export class LivestreamsComponent implements OnInit , OnChanges, AfterContentChe
   }
   
   getLiveStreams() {
-    axios.get('http://35.188.66.26:' + config.rtmp_server.http.port + '/api/streams')
+    axios.get('http://104.154.141.51:' + config.rtmp_server.http.port + '/api/streams')
         .then(res => {
             let streams = res.data;
             // console.log(`res data:`, streams['live']);
@@ -47,7 +47,7 @@ export class LivestreamsComponent implements OnInit , OnChanges, AfterContentChe
   }
   
   getStreamsInfo(live_streams) {
-    axios.get('http://34.69.175.64:3333/streams/info', {
+    axios.get('http://104.154.141.51:3333/streams/info', {
       // axios.get('http://35.188.66.26:' + config.rtmp_server.http.port  + '/streams', {
 
         params: {

@@ -34,3 +34,8 @@
   .mat-nav-list, .mat-nav-list a{
     color:white!important;
   }
+
+  .container{
+
+    max-width: 1300px;
+}

@@ -10,17 +10,17 @@ export class JwtService {
       //console.log("before going to server: " + username + " ------- " + password);
       // return this.httpClient.post<any>('http://localhost:3333/login', {"username": username, "password":password})
       //         .subscribe((data)=> { data.access_token} );
-      return this.httpClient.post<any>('http://127.0.0.1:3333/account/login',credentials); 
+      return this.httpClient.post<any>('http://104.154.141.51:3333/account/login',credentials); 
       //.subscribe((data)=> { data.access_token} );
   }
   register(account:any):any {
-    return this.httpClient.post<any>('http://127.0.0.1:3333/account/register',account); 
+    return this.httpClient.post<any>('http://104.154.141.51:3333/account/register',account); 
   }
   createStream(stream:any):any {
-    return this.httpClient.get<any>('http://127.0.0.1:8080/stream/add/'+stream.broadcasterId+'/'+stream.title); 
+    return this.httpClient.get<any>('http://104.154.141.51:8080/stream/add/'+stream.broadcasterId+'/'+stream.title); 
   }
   subscribe(userId:String,broadcasterId:String,email:String):any {
-    return this.httpClient.post<any>('http://127.0.0.1:3333/account/subscribe',{"userId":userId,"broadcasterId":broadcasterId,"userEmail":email}); 
+    return this.httpClient.post<any>('http://104.154.141.51:3333/account/subscribe',{"userId":userId,"broadcasterId":broadcasterId,"userEmail":email}); 
   }
   logout() {
     localStorage.removeItem('access_token');

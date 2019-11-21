@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class ChatService {
 
    //private url = 'http://104.198.164.77:8080'; 
-   url:string = 'http://localhost:8080'; 
+   url:string = 'http://chatservice:8080'; 
    //url:string = process.env.chatServerUrl;|| 'develop'
    
    
@@ -25,11 +25,19 @@ export class ChatService {
            return v.toString(16);
        });
    }
- 
    userDetails:any = {
-     handle : this.createUser().slice(0, 5),
-     room : 'StreamKey'
-   }
+    handle : this.createUser().slice(0, 5),
+    room : 'StreamKey'
+  }
+
+  // setting user details
+  //  setUserDetails:object(strmkey, usrname){
+  //   this.userDetails ={
+  //   "handle":usrname,
+  //   "room": strmkey
+  //   }
+  //  }
+   
  
  
    joinRoom = () => {
@@ -58,7 +66,7 @@ export class ChatService {
        });
        
        this.socket.on('typing', (data) => {
-         console.log("Some fuck!!! is typing " + data);
+        //  console.log("Some fuck!!! is typing " + data);
            //feedback.innerHTML = '<p><em>' + data.handle + ' is typing something...</em></p>';
        });
    }

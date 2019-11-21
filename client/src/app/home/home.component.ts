@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  pdfSrc = "assets/Slide.pdf";
+  pdfSrc = "assets/presentation.pdf";
 
   constructor() { }
 

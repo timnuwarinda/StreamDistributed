@@ -1,7 +1,40 @@
 :host{
     display: block;
-    margin: 4% auto;
+    margin: 2% 0%;
     z-index: 999;
-    width: 80%;
+    width: 100%;
     padding: 30px 0px;
 }
+
+.vid_div{
+    display: grid;
+    grid-template-columns: 65% 30%;
+}
+
+button{
+    margin-top: 1%;
+    background-color: blue;
+    color: white;
+    border: none;
+    height: 40px;
+    width: 100px;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.chatservice{
+    display: grid;
+    float: right;
+    width: 90%;
+
+}
+
+.data-vjs-player{
+    width: 65%;
+    float: left;
+
+}
+
+
+
+

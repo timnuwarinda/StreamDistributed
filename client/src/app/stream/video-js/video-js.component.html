@@ -1,12 +1,17 @@
-<div data-vjs-player>
-        <video id='stream-player' class="video-js" controls preload="auto">
-        </video>
+<div class="vid_div">
+        <div class="data-vjs-player" data-vjs-player>
+                <video id='stream-player' class="video-js" controls preload="auto">
+                </video>
+                <button mat-stroked-button color="accent" class="btn-block" (click)="subscribe()">Subscribe</button>
 
-        
+        </div>
+        <div>
+                <app-chat class="chatservice">
+                </app-chat>
+        </div>
+             
 </div>
 
-<button mat-stroked-button color="accent" class="btn-block" (click)="subscribe()">Subscribe</button>
 
-<app-chat id="chatservice">
 
-</app-chat>
+
