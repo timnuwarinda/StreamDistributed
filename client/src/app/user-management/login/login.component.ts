@@ -5,13 +5,13 @@ import {
   Validators,
   FormBuilder,
   FormArray
-} from "@angular/forms";
-
+} 
+from "@angular/forms";
 import { Observable } from "rxjs";
 import { JwtService } from 'src/app/services/jwt.service';
 import { Router } from '@angular/router';
 
-// const jwtDecode = require('jwt-decode');
+//const jwtDecode = require('jwt-decode');
 
 @Component({
   selector: 'app-login',
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   loginError=false; 
-  constructor(private formBuilder: FormBuilder, private jwtService: JwtService, private router: Router) { 
+  constructor(private formBuilder : FormBuilder, private jwtService: JwtService, private router: Router) { 
   }
 
   ngOnInit() {
@@ -37,20 +37,19 @@ export class LoginComponent implements OnInit {
     let success:number; 
     let user:any;
     this.submitted = true; 
-    this.jwtService.login( this.loginForm.controls.username.value , this.loginForm.controls.password.value)
+    this.jwtService.login(this.loginForm.value)
         .subscribe((data)=> { 
-          if(parseInt(data.success) === 1) {
-            localStorage.setItem ( "access_token", token );
-            localStorage.setItem("usergroup", data.user.usergroup); 
-            localStorage.setItem("username", data.user.username);
-            localStorage.setItem("name", data.user.name);
-            localStorage.setItem("email", data.user.email);
-            localStorage.setItem("stream_key", data.user.stream_key);
+            localStorage.setItem ( "access_token",  data.token );
+            localStorage.setItem("usergroup", data.userType); 
+            localStorage.setItem("username", data.username);
+            localStorage.setItem("name", data.name);
+            localStorage.setItem("email", data.email);
+            localStorage.setItem("id", data.id);
+           //localStorage.setItem("stream_key", data.user.stream_key);
             this.loginError=false; 
             this.router.navigate(['stream']);
-          }else {
-            this.loginError=true; 
-          }
+    },(error)=>{
+      this.loginError=true; 
     } );
     
     //var decoded = jwtDecode(token);

@@ -8,6 +8,7 @@ import { AvatarModule } from 'ngx-avatar';
 import { HttpClientModule } from '@angular/common/http';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
   
@@ -20,7 +21,8 @@ const routes: Routes = [
     VideoJsComponent,
     LivestreamsComponent,
     StreamComponent,
-    NavigationComponent
+    NavigationComponent,
+    ChatComponent
 
   ],
   imports: [

@@ -29,8 +29,9 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      usergroup: ['V', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      userType: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required], 
       confirm_password: ['', Validators.required], 
@@ -41,23 +42,23 @@ export class RegisterComponent implements OnInit {
   });
   }
   onSubmit() {
-    let username= this.registerForm.controls.username.value, 
-      password= this.registerForm.controls.password.value, 
-      email= this.registerForm.controls.email.value, 
-      name= this.registerForm.controls.name.value, 
-      usergroup= this.registerForm.controls.usergroup.value;
+    let account= this.registerForm.value;
+    delete account.confirm_password;
+
     this.submitted = true;
-    this.jwtService.register(username, email, password, name, usergroup)
+    this.jwtService.register(account)
       .subscribe((data)=> {
-        if(parseInt(data.success) === 1) {
-          this.registerError=false; 
+        alert("account saved sucessfully")
           this.router.navigate(['login']); 
-        } else {
-          this.errorMessage= data.message;
-          this.registerError=true; 
+          
           //console.log("Registering Failed. .... " + this.errorMessage);
-        }
-      });
+      
+      },
+      (error)=>{
+        this.errorMessage= error.message;
+        this.registerError=true; 
+      }
+      );
   }
   onReset() {
     this.submitted = false;

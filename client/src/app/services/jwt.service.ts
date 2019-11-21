@@ -6,22 +6,28 @@ import { tap } from 'rxjs/operators';
 })
 export class JwtService {
   constructor(private httpClient: HttpClient) { }
-  login(username:string, password:string) {
+  login(credentials : any) : any{
       //console.log("before going to server: " + username + " ------- " + password);
       // return this.httpClient.post<any>('http://localhost:3333/login', {"username": username, "password":password})
       //         .subscribe((data)=> { data.access_token} );
-      return this.httpClient.post<any>('http://104.154.141.51:3333/login', {"username": username, "password":password}); 
+      return this.httpClient.post<any>('http://127.0.0.1:3333/account/login',credentials); 
       //.subscribe((data)=> { data.access_token} );
   }
-  register(username: string, email:string, password:string, name: string, usergroup: string ) {
-    return this.httpClient.post<any>('http://104.154.141.51:3333/register', 
-        {"email": email, "password": password, "username": username, "name": name, "usergroup": usergroup}); 
+  register(account:any):any {
+    return this.httpClient.post<any>('http://127.0.0.1:3333/account/register',account); 
+  }
+  createStream(stream:any):any {
+    return this.httpClient.get<any>('http://127.0.0.1:8080/stream/add/'+stream.broadcasterId+'/'+stream.title); 
+  }
+  subscribe(userId:String,broadcasterId:String,email:String):any {
+    return this.httpClient.post<any>('http://127.0.0.1:3333/account/subscribe',{"userId":userId,"broadcasterId":broadcasterId,"userEmail":email}); 
   }
   logout() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('usergroup');
     localStorage.removeItem('username');
     localStorage.removeItem('name');
+    localStorage.removeItem('id');
     localStorage.removeItem('email');
     localStorage.removeItem('stream_key');
   }
@@ -37,11 +43,11 @@ export class JwtService {
   public isBroadcaster(): boolean {
     if(localStorage.getItem('usergroup') ===  null)
       return false; 
-    return (localStorage.getItem('usergroup') === "B");
+    return (localStorage.getItem('usergroup') === "Broadcaster");
   }
   public isViewer(): boolean {
     if(localStorage.getItem('usergroup') ===  null)
       return false; 
-    return (localStorage.getItem('usergroup') === "V");
+    return (localStorage.getItem('usergroup') === "user");
   }
 }
