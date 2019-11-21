@@ -2,6 +2,9 @@ const Account = require("./AccountSchema");
 const { generateToken, decode } = require("./jwt");
 const { transporter } = require("./mailSender");
 const bcrypt = require("bcrypt");
+const Client = require("node-rest-client").Client;
+
+var client = new Client();
 
 let registerFunction = function(request, response, next) {
   try {
@@ -193,10 +196,33 @@ let notifySubscriber = function(messageObject) {
   }
 };
 
+let getStreamInfo = function(request,response,next){
+ 
+  
+console.log("thisi ::->"+request.params.streamKey);
+client.get("http://localhost:8080/stream/get/"+request.params.streamKey,function(stream,res){
+    
+  console.log("this is the data :: -->"+stream);
+if(stream){
+
+  Account.findOne({ _id: stream.broadcasterId },{subscribers :0}, function(err, obj) {
+     if(err) response.json({"result":0});
+     else
+     delete obj.subscribers;
+       response.json({"result":1,"data":obj,"streamKey":request.params.streamKey});
+  });
+}else{
+  response.json({"result":0})
+}
+})
+ 
+}
+  
 module.exports = {
   registerFunction,
   login,
   subscribe,
   checkSubscribeRest,
-  notifySubscriber
+  notifySubscriber,
+  getStreamInfo
 };

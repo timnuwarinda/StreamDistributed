@@ -3,8 +3,10 @@ import videojs from 'video.js';
 import axios from "axios";
 import { Observable } from 'rxjs';
 import { of as ObservableOf } from 'rxjs';
-//import config from '../../../config/default';
+import config from '../../../config/default';
 import { ActivatedRoute } from '@angular/router';
+import { JwtService } from 'src/app/services/jwt.service';
+
 
 @Component({
   selector: 'app-video-js',
@@ -21,7 +23,7 @@ export class VideoJsComponent implements OnDestroy, OnInit {
   @Input() urlVideo: string;
   @Input() urlPoster: string;
 
-  constructor(private route : ActivatedRoute) { 
+  constructor(private route : ActivatedRoute, private jwtService: JwtService) { 
     route.params.subscribe(params=>{this.usernme= params['username']})
     // console.log(`username:::`,this.usernme);
   }
@@ -41,7 +43,7 @@ export class VideoJsComponent implements OnDestroy, OnInit {
       stream: false,
       videoJsOptions: null
     }
-    axios.get('http://35.238.124.77:3333/user', {
+    axios.get('http://34.69.175.64:3333/user', {
 
     // axios.get('/user', {
       params: {
@@ -56,11 +58,10 @@ export class VideoJsComponent implements OnDestroy, OnInit {
               autoplay: false,
               controls: true,
               sources: [{
-<<<<<<< HEAD
-                //  src: 'http://127.0.0.1:' + config.rtmp_server.http.port + '/live/' + res.data.stream_key + '/index.m3u8',
-=======
-                  src: 'http://35.238.124.77:' + config.rtmp_server.http.port + '/live/' + res.data.stream_key + '/index.m3u8',
->>>>>>> master
+                  // src: 'http://35.188.66.26:' + config.rtmp_server.http.port + '/live/' + res.data.stream_key + '/index.m3u8',
+                  src: 'http://35.188.66.26:8888/live/fTRSLu31/index.m3u8',
+
+                  
                   type: 'application/x-mpegURL'
               }],
               fluid: true,
@@ -89,5 +90,22 @@ export class VideoJsComponent implements OnDestroy, OnInit {
     });
 
   }
+
+  subscribe(){
+     
+    let userId = localStorage.getItem('id');
+    let email = localStorage.getItem('email');
+    let broadcasterId = '5dd38d9c5265a798a56c1d38';
+
+    this.jwtService.subscribe(userId,broadcasterId,email).subscribe((data)=>{
+
+      alert(data.data);
+    },
+    (error)=>{
+      alert("could not subscribe, "+error.message);
+    });
+
+  }
+
  
 }
