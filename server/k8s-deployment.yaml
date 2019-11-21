@@ -1,41 +1,41 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: server-deployment
+  name: rmtpserver-deployment
   labels:
-    app: server
+    app: rmtpserver
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: server
+      app: rmtpserver
   template:
     metadata:
       labels:
-        app: server
+        app: rmtpserver
 
     spec:
       containers:
-        - name: server
-          image: timnuwa/server:latest
+        - name: rmtpserver
+          image: timnuwa/rmtpserver:latest
           ports:
-            - containerPort: 1935
+            - containerPort: 8080
           securityContext:
             privileged: true
             capabilities:
               add:
                 - SYS_ADMIN
-          # lifecycle:
-          #   postStart:
-          #     exec:
-          #       command: ["gcsfuse","-o", "allow_other", "--key-file", "/usr/src/app/stream-259020-firebase-adminsdk-z0kuq-cc9d2f5021.json","--implicit-dirs", "stream-259020.appspot.com", "/mnt/data"]
-          #   preStop:
-          #     exec:
-          #       command: ["fusermount", "-u", "/mnt/data"]
+          lifecycle:
+            postStart:
+              exec:
+                command: ["gcsfuse","--key-file", "/usr/src/app/stream-259020-firebase-adminsdk-z0kuq-cc9d2f5021.json","--implicit-dirs", "stream-259020.appspot.com", "/mnt/data"]
+            preStop:
+              exec:
+                command: ["fusermount", "-u", "/mnt/data"]
           env:
             - name: KEY1
               valueFrom:
                 configMapKeyRef:
-                  name: server-config
+                  name: rmtpserver-config
                   key: someKey1
             

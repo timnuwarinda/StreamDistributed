@@ -1,6 +1,6 @@
 
 
-containerID := $(shell docker ps -a -q --filter ancestor=timnuwa/server:latest)
+containerID := $(shell docker ps -a -q --filter ancestor=timnuwa/rmtpserver:latest)
 
 #===================  Node  ===========================
 
@@ -16,22 +16,22 @@ build:
 # 	java -jar build/libs/service-a-*.jar
 
 #===================  docker  ===========================
-docker-build: build
-	docker build -t timnuwa/server:latest .
+docker-build:
+	docker build -t timnuwa/rmtpserver:latest .
 
 
 docker-run: docker-build
-	docker run -p 8080:8080 timnuwa/server:latest
+	docker run -p 8080:8080 timnuwa/rmtpserver:latest
 
 
 docker-login:
 	docker login
 
 docker-push: docker-login docker-build
-	docker push timnuwa/server:latest
+	docker push timnuwa/rmtpserver:latest
 
 docker-bash:
-	docker exec -ti timnuwa/server:latest /bin/sh
+	docker exec -ti timnuwa/rmtpserver:latest /bin/sh
 
 docker-containerID:
 	@echo running: $(containerID)
@@ -92,7 +92,7 @@ k8s-persistence-create:
 	kubectl apply -f k8s-persistence-volumn.yaml
 	kubectl apply -f k8s-persistence-database.yaml
 	echo "create initial db, run this when DB service"gcloud container clusters get-credentials standard-cluster-1 --zone us-central1-a --project ecommerce-258417
-	echo "kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h server-db -ppassword -e 'create database db_example;'"
+	echo "kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h rmtpserver-db -ppassword -e 'create database db_example;'"
 
 k8s-persistence-delete:
 	kubectl delete -f k8s-persistence-database.yaml
@@ -107,7 +107,7 @@ k8s-info:
 	kubectl get configmaps
 	kubectl get services
 	kubectl get pods
-	echo "You can also check DB via:\n kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h server-db -ppassword "
+	echo "You can also check DB via:\n kubectl run -it --rm --image=mysql:5.6 --restart=Never mysql-client -- mysql -h rmtpserver-db -ppassword "
 
 
 

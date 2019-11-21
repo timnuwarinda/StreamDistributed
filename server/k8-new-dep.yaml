@@ -29,11 +29,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: server
+  name: rmtpserver
 spec:
   type: LoadBalancer
   selector:
-    app: server
+    app: rmtpserver
   ports:
     - name: hlsport
       protocol: TCP

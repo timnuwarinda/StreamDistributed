@@ -1,9 +1,26 @@
+ 
+FROM ubuntu:16.04
 
-FROM tiangolo/nginx-rtmp
+RUN apt-get update
 
-RUn apt-get update && apt-get install -y && software-properties-common
 
-RUN add-apt-repository ppa:jonathonf/ffmpeg-4
+
+# Install.
+
+# Add files.
+# ADD root/.bashrc /root/.bashrc
+# ADD root/.gitconfig /root/.gitconfig
+# ADD root/.scripts /root/.scripts
+RUN apt-get update
+RUN apt-get install --yes curl
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN apt-get install --yes nodejs
+RUN apt-get install --yes build-essential
+
+
+
+RUN mkdir -p /mnt/data
+
 
 RUN apt-get update -y && \
     apt-get install lsb-release -y && \
@@ -12,11 +29,15 @@ RUN apt-get update -y && \
     apt-get install -y curl && \
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
     apt-get update -y && \
-    apt-get install gcsfuse -y && apt-get install ffmpeg && apt-get install nodejs
+    apt-get install gcsfuse -y
 
-RUN mkdir -p /mnt/data
+RUN apt-get install --yes software-properties-common
 
-# RUN apk add  --no-cache ffmpeg
+RUN add-apt-repository -y ppa:jonathonf/ffmpeg-4
+
+RUN apt-get update
+
+RUN apt install --yes ffmpeg
 
 
 WORKDIR /usr/src/app
@@ -28,13 +49,8 @@ RUN npm install
 
 COPY . .
  
-EXPOSE 1935
+# EXPOSE 1935
+
 
 CMD ["node","app.js"]
-
-
-
-
-
-
 
