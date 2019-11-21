@@ -1,35 +1,38 @@
-<div>
-    <div class="container mt-5">
-        <h4>Streaming Key</h4>
-        <hr class="my-4"/>
-
-        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6">
-            <div class="row">
-                <h5>{{this.state.stream_key}}</h5>
-            </div>
-            <div class="row">
-                <button
-                    class="btn btn-dark mt-2"
-                    (click)="generateStreamKey()">
-                    Generate a new key
-                </button>
-            </div>
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center">
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>Create Upcoming Stream</mat-card-title>
+      </mat-card-header>
+  
+      <form [formGroup]="streamForm" class="example-form">
+        <div *ngIf="registerError && submitted">
+          <p style="color:red">{{ errorMessage }}.</p>
         </div>
-    </div>
-
-    <div class="container mt-5">
-        <h4>How to Stream</h4>
-        <hr class="my-4"/>
-
-        <div class="col-12">
-            <div class="row">
-                <p>
-                    You can use <a target="_blank" href="https://obsproject.com/">OBS</a> to Live stream. If you're
-                    using OBS, go to Settings > Stream and select Custom from service dropdown. Enter
-                    <b>rtmp://104.154.141.51:1935/live</b> in server input field. Also, add your stream key.
-                    Click apply to save.
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
+    <mat-card-content>
+          <mat-form-field class="example-full-width">
+              <input
+                matInput
+                placeholder="Broadcast Title"
+                type="text"
+                formControlName="title"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+              />
+              <div *ngIf="submitted && f.title.errors">
+                <div *ngIf="f.title.errors.required">title is required</div>
+              </div>
+            </mat-form-field>
+      
+        </mat-card-content>
+         <button
+          mat-stroked-button
+          color="accent"
+          class="btn-block"
+          (click)="onSubmit()"
+        >
+          Create Stream
+        </button>
+      </form>
+   
+    </mat-card>
+  </div>

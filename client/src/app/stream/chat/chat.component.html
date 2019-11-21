@@ -1,0 +1,23 @@
+<div>
+    <button *ngIf="hasNotJoined; else elseBlock" type="button" id="joinroomBtn" (click)="joinRoom()">JoinChatRoom</button>
+    <ng-template #elseBlock>
+        <h2>ChatRoom</h2>
+        <div id="mario-chat">
+            <div id="chat-window">
+                <div id="output">
+                    
+                    <div id="feedback">
+                        
+                    </div>
+
+                    <div *ngFor="let data of messages">
+                            {{data.handle}} &nbsp;:&nbsp; {{data.message}}
+                    </div>
+
+                </div>
+            </div>    
+            <input (keypress)="typing()" (ngModel)="message" name="message" type="text" placeholder="Message"/>    
+            <button id="send" (click)="sendMessage()">Send</button>
+        </div> 
+    </ng-template>
+ </div>

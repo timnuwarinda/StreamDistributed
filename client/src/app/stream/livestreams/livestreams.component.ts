@@ -23,7 +23,7 @@ export class LivestreamsComponent implements OnInit , OnChanges, AfterContentChe
       live_streams: []
     }
     
-    this.getLiveStreams();
+   this.getLiveStreams();
 
   }
 
@@ -34,6 +34,7 @@ export class LivestreamsComponent implements OnInit , OnChanges, AfterContentChe
   ngOnChanges() {
   
   }
+  
   getLiveStreams() {
     axios.get('http://35.188.66.26:' + config.rtmp_server.http.port + '/api/streams')
         .then(res => {
@@ -44,8 +45,9 @@ export class LivestreamsComponent implements OnInit , OnChanges, AfterContentChe
             }
         });
   }
+  
   getStreamsInfo(live_streams) {
-    axios.get('http://104.154.141.51:3333/streams/info', {
+    axios.get('http://34.69.175.64:3333/streams/info', {
       // axios.get('http://35.188.66.26:' + config.rtmp_server.http.port  + '/streams', {
 
         params: {

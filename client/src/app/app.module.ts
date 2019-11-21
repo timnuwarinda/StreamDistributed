@@ -25,6 +25,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { HomeComponent } from './home/home.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,14 +49,14 @@ import { HomeComponent } from './home/home.component';
       config: {
         tokenGetter: function  tokenGetter() {
              return     localStorage.getItem('access_token');},
-        whitelistedDomains: ['http://104.154.141.51:3333'],
-        blacklistedRoutes: ['http://104.154.141.51:3333/login']
+        whitelistedDomains: ['http://34.69.175.64:3333'],
+        blacklistedRoutes: ['http://34.69.175.64:3333/login']
       }
     }),
     BrowserAnimationsModule,
     AngularMaterialModule,
     PdfViewerModule, 
-    MatSliderModule, LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule
+    MatSliderModule, LayoutModule, MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule,
   ],
   providers: [DeactivateGuard],
   bootstrap: [AppComponent],

@@ -53,14 +53,13 @@
         <a mat-list-item  *ngIf="jwtService.isLoggedIn() && (!jwtService.isBroadcaster())">Subscriptions</a>      
         <a mat-list-item *ngIf="jwtService.isLoggedIn()">Profile</a>      
         <a mat-list-item [routerLink]="'settings'" *ngIf="jwtService.isLoggedIn() && jwtService.isBroadcaster()">Settings</a>
-          
+        
       </mat-nav-list>
     </mat-sidenav>
     
   </mat-sidenav-container>
 <div class="container">
     <router-outlet></router-outlet>
-
 </div>
 
 <!-- <router-outlet *ngIf="token"></router-outlet> -->
