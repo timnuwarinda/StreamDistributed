@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clientstreamservice-deployment
+  labels:
+    app: clientstreamservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: clientstreamservice
+  template:
+    metadata:
+      labels:
+        app: clientstreamservice
+
+    spec:
+      containers:
+        - name: clientstreamservice
+          image: timnuwa/clientstreamservice:latest
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+          env:
+            - name: KEY1
+              valueFrom:
+                configMapKeyRef:
+                  name: clientstreamservice-config
+                  key: someKey1
+            - name: PRODUCTS_SERVICE
+              valueFrom:
+                configMapKeyRef:
+                  name: clientstreamservice-config
+                  key: productservice
+            - name: AUTH_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: clientstreamservice-config
+                  key: authURL
+            - name: CART_SERVICE
+              valueFrom:
+                configMapKeyRef:
+                  name: clientstreamservice-config
+                  key: cartservice
+            - name: PAYMENT_SERVICE
+              valueFrom:
+                configMapKeyRef:
+                  name: clientstreamservice-config
+                  key: paymentservice
+            - name: ORDER_SERVICE
+              valueFrom:
+                configMapKeyRef:
+                  name: clientstreamservice-config
+                  key: orderService
+            - name: USER_SERVICE
+              valueFrom:
+                configMapKeyRef:
+                  name: clientstreamservice-config
+                  key: userService
+            - name: SERVICE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: clientstreamservice-secrets
+                  key: service-api-key

@@ -1,0 +1,15 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: clientstreamservice-config
+data:
+  someKey1: value1
+  #reference: https://cloud.spring.io/spring-cloud-static/spring-cloud-kubernetes/1.1.0.RC1/reference/html/#kubernetes-native-service-discovery
+
+  nextService: server.default.svc.cluster.local:8084
+  authURL: "35.193.244.58"
+  cartservice: cartservice.default.svc.cluster.local
+  productservice: productservice.default.svc.cluster.local
+  paymentservice: paymentservice.default.svc.cluster.local
+  orderService: orderservice.default.svc.cluster.local
+  userService: userservice.default.svc.cluster.local
