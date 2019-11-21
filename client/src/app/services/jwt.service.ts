@@ -10,11 +10,11 @@ export class JwtService {
       //console.log("before going to server: " + username + " ------- " + password);
       // return this.httpClient.post<any>('http://localhost:3333/login', {"username": username, "password":password})
       //         .subscribe((data)=> { data.access_token} );
-      return this.httpClient.post<any>('http://127.0.0.1:3333/login', {"username": username, "password":password}); 
+      return this.httpClient.post<any>('http://35.238.124.77:3333/login', {"username": username, "password":password}); 
       //.subscribe((data)=> { data.access_token} );
   }
   register(username: string, email:string, password:string, name: string, usergroup: string ) {
-    return this.httpClient.post<any>('http://127.0.0.1:3333/register', 
+    return this.httpClient.post<any>('http://35.238.124.77:3333/register', 
         {"email": email, "password": password, "username": username, "name": name, "usergroup": usergroup}); 
   }
   logout() {
